@@ -1,16 +1,28 @@
 "use client";
+import { useEffect, useState } from "react";
 import Lottie from "lottie-react";
+import fire from "@/assets/fire.json";
 
 export default function FireLoader() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    console.log("Contenido del JSON fire:", fire); // 👈 confirma estructura
+    setShow(true);
+  }, []);
+
   return (
-    <div className="w-24 h-24 flex justify-center items-center">
-      <Lottie
-        animationData={require("./fire.json")} // si lo descargas
-        // o usa animationData directamente con fetch si es externo
-        path="https://assets10.lottiefiles.com/packages/lf20_TYutWv.json"
-        loop
-        autoplay
-      />
+    <div className="flex justify-center items-center py-4">
+      {show ? (
+        <Lottie
+          animationData={fire}
+          loop
+          autoplay
+          className="w-32 h-32"
+        />
+      ) : (
+        <p>🔥 Cargando...</p>
+      )}
     </div>
   );
 }
