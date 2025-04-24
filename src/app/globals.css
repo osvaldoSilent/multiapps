@@ -31,3 +31,13 @@ body {
   margin: 0;
   padding: 0;
 }
+
+/* Oculta scrollbar pero mantiene scroll funcional */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;  /* Internet Explorer y Edge */
+  scrollbar-width: none;     /* Firefox */
+}

@@ -5,10 +5,11 @@ import CustomButton from "@/components/globals/CustomButton";
 interface Props {
   username: string;
   role: string;
-  onDelete: () => void;
+  onHandleDelete: (username: string) => void;
+  onHandleExpand: () => void;
 }
 
-export default function UserCard({ username, role, onDelete }: Props) {
+export default function UserCard({ username, role, onHandleDelete, onHandleExpand }: Props) {
   return (
     <div className="bg-gray-800 p-2 lg:p-15 md:p-10 sm:p-5 rounded-xl shadow flex flex-row justify-between px-4 py-4 gap-3 w-full">
 
@@ -22,9 +23,9 @@ export default function UserCard({ username, role, onDelete }: Props) {
         <CustomButton
           text={role}
           bgColor="bg-green-700"
+          onClick={()=> onHandleExpand(username)}
         />
-        <CustomButton text="Eliminar" bgColor="bg-red-600" />
-        {/*<RedButton onClick={onDelete} />*/}
+        <CustomButton text="Eliminar" bgColor="bg-red-600" onClick={()=> onHandleDelete(username)}/>
       </div>
 
     </div>
