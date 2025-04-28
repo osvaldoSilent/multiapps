@@ -64,16 +64,13 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
   const handleMenu = (destination: string) => {
   switch (destination) {
       case 'home':
-            router.push('/');
-            break;
-      case 'users':
-            router.push('/users');
+            window.location.href = "/home";
             break;
       case 'wallet':
-            router.push('/wallet');
+            window.location.href = "/login";
             break;
       case 'admin':
-            router.push('/admin');
+            window.location.href = "/admin";
             break;
       default:
             console.warn(`Ruta desconocida: ${destination}`);
@@ -87,15 +84,14 @@ const [isLoggedIn, setIsLoggedIn] = useState(false);
     shadow-md text-xs sm:text-xl ">
 
       <div className="flex flex-row justify-between gap-x-6 h-full ">
-          <section className="flex items-center h-full border px-4">
-
-              <h1 className="font-bold">{getTitle()}</h1>
+          <section className="h-full flex items-center px-4 border border-white rounded cursor-pointer">
+              <h1 className="font-bold" onClick={()=>handleMenu("home")}> {getTitle()} </h1>
           </section>
           <section className="h-full flex items-center px-4 border border-white rounded cursor-pointer">
-              <h2 className="font-bold" onClick={handleDelete}>ADMIN</h2>
+              <h2 className="font-bold" onClick={()=>handleMenu("admin")}>ADMIN</h2>
           </section>
           <section className="h-full flex items-center px-4 border border-white rounded cursor-pointer">
-              <h2 className="font-bold" onClick={handleDelete}>{getWalletTitle()}</h2>
+              <h2 className="font-bold" onClick={()=>handleMenu("wallet")}>{getWalletTitle()}</h2>
           </section>
       </div>
       <div>

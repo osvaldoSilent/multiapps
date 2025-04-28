@@ -5,6 +5,7 @@ import UserCard from "./UserCard";
 import PlusButton from "@/components/globals/PlusButton";
 import UserRegisterModal from "@/components/users/UserRegisterModal";
 import { useScreenSize } from "@/hooks/useScreenSize";
+import { useRouter } from "next/navigation"; // si estás usando Next.js 13+
 
 
 interface User {
@@ -16,27 +17,36 @@ interface User {
 
 export default function UsersList() {
   const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState<{ username: string; role: string ; token: string } | null>(null);
 
   const onHandleDelete = async (username: string) => {
-    if (!confirm(`¿Eliminar a ${username}?`)) return;
+    if(user){
+        if(user.role=== "ADMIN" ){
+            if (!confirm(`¿Eliminar a ${username}?`)) return;
 
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/delete/user`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username }), // ← Enviamos el JSON
-      });
+                try {
+                  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/delete/user`, {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ username }), // ← Enviamos el JSON
+                  });
 
-      if (res.ok) {
-        setUsers(users.filter((u) => u.username !== username));
-      } else {
-        setError("No se pudo eliminar");
-      }
-    } catch (err) {
-      console.error("Error al eliminar:", err);
-      setError("Ocurrió un error al eliminar");
+                  if (res.ok) {
+                    setUsers(users.filter((u) => u.username !== username));
+                  } else {
+                    setError("No se pudo eliminar");
+                  }
+                } catch (err) {
+                  console.error("Error al eliminar:", err);
+                  setError("Ocurrió un error al eliminar");
+                }
+        }else{
+            alert("Necesitas tener el rol adecuado para ejecutar esta tarea");
+        }
+    }else{
+        alert("Necesitas loggearte para ejecutar esta tarea");
     }
   };
 
@@ -81,6 +91,11 @@ export default function UsersList() {
 
   useEffect(() => {
     fetchUsers();
+    const data = localStorage.getItem("dataUser");
+      if (data) {
+        const userData = JSON.parse(data);
+        setUser(userData);
+      }
   }, []);
 
   return (
