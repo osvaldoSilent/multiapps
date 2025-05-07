@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+.env*
+.git
+*.log
+.vscode
+.idea
+.DS_Store
+*.swp
+*.tsbuildinfo

@@ -1,9 +1,11 @@
+
 import { FiPlus } from 'react-icons/fi';
 
 interface PlusButtonProps {
   text?: string;
   bgColor?: string;
   textColor?: string;
+  positionClass?: string;
   onClick?: () => void;
   className?: string;
 }
@@ -14,8 +16,7 @@ export default function PlusButton({
   textColor = "text-white",
   positionClass,
   onClick,
-  className = "",
-  showText
+  className = ""
 }: PlusButtonProps) {
   return (
     <button

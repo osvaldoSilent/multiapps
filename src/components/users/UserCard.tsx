@@ -1,4 +1,3 @@
-import RedButton from "@/components/globals/RedButton";
 import CustomButton from "@/components/globals/CustomButton";
 
 
@@ -6,7 +5,7 @@ interface Props {
   username: string;
   role: string;
   onHandleDelete: (username: string) => void;
-  onHandleExpand: () => void;
+  onHandleExpand: (username: string) => void;
 }
 
 export default function UserCard({ username, role, onHandleDelete, onHandleExpand }: Props) {
