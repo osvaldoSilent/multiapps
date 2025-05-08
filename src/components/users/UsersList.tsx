@@ -79,8 +79,8 @@ export default function UsersList() {
 
     const fetchUsers = async () => {
       try {
-        setError("");
-        const res = await fetch("api/auth/users"); // ← usa ruta local del proxy
+        setError(""); // limpiamos el error antes de recargar
+        const res = await fetch("api/auth/users"); //  usa ruta local del proxy
         const data = await res.json();
         alert(data);
         setUsers(data);
