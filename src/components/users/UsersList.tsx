@@ -31,7 +31,7 @@ export default function UsersList() {
             if (!confirm(`¿Eliminar a ${username}?`)) return;
 
                 try {
-                  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/delete/user`, {
+                  const res = await fetch(`api/auth/delete/user`, {
                     method: "DELETE",
                     headers: {
                       "Content-Type": "application/json",

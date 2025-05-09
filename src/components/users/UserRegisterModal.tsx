@@ -27,7 +27,7 @@ export default function UserRegisterModal({ onClose, onSuccess }: Props) {
     e.preventDefault();
     if (!form.username || !form.password || !form.role) return setError("Completa todos los campos");
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
+    const res = await fetch(`api/auth/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
